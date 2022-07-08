@@ -1,0 +1,65 @@
+.container {
+  position: fixed;
+  left: 50px;
+  bottom: 0px;
+  width: 40px;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  &:after {
+    content: '';
+    margin: 10px auto 0 auto;
+    background-color: black;
+    width: 1px;
+    height: 100px;
+    animation: 0.3s ease-out revealLine;
+  }
+
+  // @for $i from 1 through 4 {
+  //   .social:nth-of-type(#{$i}n) img {
+  //     animation-delay: #{1.25 - $i/4}s;
+  //   }
+  // }
+}
+
+.social {
+  text-align: center;
+  margin-bottom: 20px;
+  transition: transform 0.25s;
+
+  img {
+    width: 50%;
+    margin: 0px auto;
+    animation: 0.5s linear 0.3s revealLogo;
+    animation-fill-mode: forwards;
+    opacity: 0;
+  }
+
+  &:hover {
+    transform: translateY(-5px);
+  }
+}
+
+@keyframes revealLine {
+  from {
+    height: 0px;
+  }
+
+  to {
+    height: 100px;
+  }
+}
+
+@keyframes revealLogo {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0px);
+  }
+}
