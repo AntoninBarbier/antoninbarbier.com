@@ -30,7 +30,7 @@ const Socials: FunctionComponent = () => {
       <ul className={styles.list}>
         {socials.map((social) => (
           <li key={social.name} className={styles.social}>
-            <a href={social.url} target='_blank'>
+            <a href={social.url} target='_blank' rel='noreferrer'>
               <img src={social.logo} title={social.name} alt={social.name} />
             </a>
           </li>
