@@ -1,0 +1,21 @@
+// Responsive
+
+@mixin mobile() {
+  @media screen and (max-width: 750px) {
+    @content;
+  }
+}
+@mixin mobileSmall() {
+  @media screen and (max-width: 380px) {
+    @content;
+  }
+}
+@mixin tablet() {
+  @media screen and (max-width: 1024px) {
+    @content;
+  }
+}
+
+// Colors
+
+$white: #fff;

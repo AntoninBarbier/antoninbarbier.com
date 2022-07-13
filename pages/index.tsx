@@ -1,12 +1,11 @@
+import React, { FunctionComponent, useLayoutEffect, useMemo, useRef, useState } from 'react'
 import type { NextPage } from 'next'
-import dynamic from 'next/dynamic'
 import Head from 'next/head'
-import Image from 'next/image'
 import Navbar from '../components/Navbar'
 import Socials from '../components/Socials'
-import styles from '../styles/Home.module.scss'
-
-const Canvas = dynamic(() => import('../components/Canvas'), { ssr: false })
+import styles from './index.module.scss'
+import Title from 'components/Title'
+import StarsBackground from 'components/StarsBackground'
 
 const Home: NextPage = () => {
   return (
@@ -18,13 +17,9 @@ const Home: NextPage = () => {
       </Head>
       <main>
         <Navbar />
+        <StarsBackground />
         <section className={styles.heading}>
-          <Canvas />
-          <h1>
-            Bonjour, je m'appelle Antonin Barbier.
-            <br />
-            <span>Je suis développeur front-end.</span>
-          </h1>
+          <Title title="Bonjour, je m'appelle Antonin Barbier." subtitle='Je suis développeur front-end.' />
         </section>
       </main>
       <Socials />

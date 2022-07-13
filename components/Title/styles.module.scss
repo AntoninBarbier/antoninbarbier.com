@@ -1,0 +1,19 @@
+/* Config */
+@import 'config/styles.scss';
+
+.title {
+  display: block;
+  color: $white;
+  font-size: 3rem;
+  margin-bottom: 10px;
+
+  @include mobile {
+    text-align: center;
+  }
+}
+
+.subtitle {
+  display: block;
+  color: $white;
+  font-size: 2rem;
+}
