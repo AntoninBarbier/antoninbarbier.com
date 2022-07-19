@@ -1,7 +1,7 @@
 // Responsive
 
 @mixin mobile() {
-  @media screen and (max-width: 750px) {
+  @media screen and (max-width: 767px) {
     @content;
   }
 }
@@ -10,8 +10,15 @@
     @content;
   }
 }
+
 @mixin tablet() {
   @media screen and (max-width: 1024px) {
+    @content;
+  }
+}
+
+@mixin desktop() {
+  @media screen and (min-width: 1025px) {
     @content;
   }
 }

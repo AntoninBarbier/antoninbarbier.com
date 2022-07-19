@@ -1,19 +1,52 @@
 /* Config */
 @import 'config/styles.scss';
 
+.container {
+  @include tablet {
+    margin: 0 auto;
+    text-align: center;
+  }
+}
+
 .title {
   display: block;
   color: $white;
   font-size: 3rem;
   margin-bottom: 10px;
+  font-weight: 500;
+  opacity: 0;
+  transform: translateY(-20px);
 
   @include mobile {
-    text-align: center;
+    font-size: 2rem;
   }
+
+  animation: 1s revealTitle 1s forwards;
 }
 
 .subtitle {
   display: block;
   color: $white;
   font-size: 2rem;
+  font-weight: 200;
+  opacity: 0;
+  transform: translateY(-20px);
+
+  @include mobile {
+    font-size: 1.5rem;
+  }
+
+  animation: 1s revealTitle 2s forwards;
+}
+
+@keyframes revealTitle {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0px);
+  }
 }

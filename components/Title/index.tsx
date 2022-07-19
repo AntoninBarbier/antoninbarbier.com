@@ -8,7 +8,7 @@ interface TitlePropsType {
 
 const Title: FunctionComponent<TitlePropsType> = ({ title, subtitle }) => {
   return (
-    <h1>
+    <h1 className={styles.container}>
       <span className={styles.title}>{title}</span>
       <span className={styles.subtitle}>{subtitle}</span>
     </h1>

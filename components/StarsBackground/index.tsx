@@ -36,7 +36,7 @@ const Stars: FunctionComponent<StarsPropsType> = ({ count }) => {
     particles.push(starGeometry)
   }
 
-  useFrame((state) => {
+  useFrame(() => {
     mesh.current.setFromPoints(vertices)
     vertices.forEach((vertex, i) => {
       particles[i].velocity += particles[i].acceleration
@@ -54,7 +54,7 @@ const Stars: FunctionComponent<StarsPropsType> = ({ count }) => {
   return (
     <points ref={points}>
       <bufferGeometry attach='geometry' ref={mesh} />
-      <pointsMaterial size={0.2} color={'white'} opacity={0.2} sizeAttenuation={true} />
+      <pointsMaterial size={0.3} color={'white'} opacity={0.2} sizeAttenuation={true} />
     </points>
   )
 }
@@ -63,6 +63,7 @@ const Scene: FunctionComponent<SceneProps> = ({ children }) => {
   useThree(({ camera }) => {
     camera.rotation.set(Math.PI / 2, 0, 0)
   })
+
   const sceneRef = useRef<THREE.Group>(null)
   useFrame((state) => {
     if (sceneRef.current) {
