@@ -1,5 +1,6 @@
 import React, { FunctionComponent } from 'react'
 import styles from './styles.module.scss'
+import { event } from '../../lib/ga'
 
 const socials = [
   {
@@ -30,7 +31,19 @@ const Socials: FunctionComponent = () => {
       <ul className={styles.list}>
         {socials.map((social) => (
           <li key={social.name} className={styles.social}>
-            <a href={social.url} target='_blank' rel='noreferrer'>
+            <a
+              href={social.url}
+              target='_blank'
+              rel='noreferrer'
+              onClick={() => {
+                event({
+                  action: `social_link`,
+                  params: {
+                    social_link_name: social.name,
+                  },
+                })
+              }}
+            >
               <img src={social.logo} title={social.name} alt={social.name} />
             </a>
           </li>
