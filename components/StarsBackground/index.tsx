@@ -1,9 +1,10 @@
 import { Canvas, useFrame, useThree } from '@react-three/fiber'
-import { FunctionComponent, useRef } from 'react'
+import { FunctionComponent, ReactNode, useRef } from 'react'
 import * as THREE from 'three'
+import { Vector3 } from 'three'
 import styles from './styles.module.scss'
 
-interface StarGeometryType {
+interface StarGeometryType extends Partial<Vector3> {
   x: number
   y: number
   z: number
@@ -15,12 +16,14 @@ interface StarsPropsType {
   count: number
 }
 
+interface SceneProps {
+  children?: ReactNode
+}
+
 const Stars: FunctionComponent<StarsPropsType> = ({ count }) => {
-  useThree(({ camera }) => {
-    camera.rotation.set(Math.PI / 2, 0, 0)
-  })
   const mesh = useRef<THREE.BufferGeometry>(null!)
-  const points = useRef()
+  const points = useRef<THREE.Points>(null)
+  const vertices: Array<Vector3> = []
   const particles: Array<StarGeometryType> = []
   for (let i = 0; i < count; i++) {
     let vertex = new THREE.Vector3(Math.random() * 1200 - 600, Math.random() * 1200 - 600, Math.random() * 1200 - 600)
@@ -29,21 +32,23 @@ const Stars: FunctionComponent<StarsPropsType> = ({ count }) => {
       velocity: 0,
       acceleration: 0.001,
     }
+    vertices.push(vertex)
     particles.push(starGeometry)
   }
 
-  useFrame(() => {
-    const positions = mesh.current.setFromPoints(particles).attributes.position.array
-    console.log(positions)
-    particles.forEach((particle, i) => {
-      particle.velocity += particle.acceleration
-      particle.y -= particle.velocity
-      if (particle.y < -200) {
-        particle.y = 500
-        particle.velocity = 0
+  useFrame((state) => {
+    mesh.current.setFromPoints(vertices)
+    vertices.forEach((vertex, i) => {
+      particles[i].velocity += particles[i].acceleration
+      vertex.y -= particles[i].velocity
+      if (vertex.y < -200) {
+        vertex.y = 500
+        particles[i].velocity = 0
       }
     })
-    points.current.rotation.y += 0.001
+    if (points.current) {
+      points.current.rotation.y += 0.001
+    }
   })
 
   return (
@@ -54,11 +59,27 @@ const Stars: FunctionComponent<StarsPropsType> = ({ count }) => {
   )
 }
 
+const Scene: FunctionComponent<SceneProps> = ({ children }) => {
+  useThree(({ camera }) => {
+    camera.rotation.set(Math.PI / 2, 0, 0)
+  })
+  const sceneRef = useRef<THREE.Group>(null)
+  useFrame((state) => {
+    if (sceneRef.current) {
+      sceneRef.current.rotation.x = THREE.MathUtils.lerp(sceneRef.current.rotation.x, (state.mouse.y * Math.PI) / 20, 1)
+      sceneRef.current.rotation.z = THREE.MathUtils.lerp(sceneRef.current.rotation.y, (state.mouse.x * Math.PI) / 20, 1)
+    }
+  })
+  return <group ref={sceneRef}>{children}</group>
+}
+
 const StarsBackground: FunctionComponent = () => {
   return (
     <div className={styles.scene}>
       <Canvas camera={{ position: [0, 0, 1] }}>
-        <Stars count={5000} />
+        <Scene>
+          <Stars count={5000} />
+        </Scene>
       </Canvas>
     </div>
   )
