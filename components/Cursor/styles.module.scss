@@ -1,0 +1,81 @@
+/* Config */
+@import 'config/styles.scss';
+
+.cursor {
+	position: fixed;
+	pointer-events: none;
+	z-index: 20;
+
+	div {
+		width: 5px;
+		height: 5px;
+		background-color: $white;
+		border-radius: 100%;
+		transform: translate(-50%, -50%);
+		will-change: opacity, background-color, width, height, border;
+		transition-duration: 200ms;
+	}
+
+	&.hovered {
+		div {
+			width: 30px;
+			height: 30px;
+			border: 1px solid white;
+			background-color: transparent;
+		}
+	}
+
+	&.clicked {
+		div {
+			background-color: grey;
+			opacity: 0.7;
+			width: 40px;
+			height: 40px;
+		}
+	}
+
+	&.hidden {
+		opacity: 0;
+		transition: opacity 0.25s;
+	}
+}
+
+.outer {
+	position: fixed;
+	z-index: 20;
+	pointer-events: none;
+	-webkit-transition-duration: 200ms;
+	transition-duration: 200ms;
+	-webkit-transition-timing-function: cubic-bezier(0.37, 0.63, 0.73, 1.06);
+	transition-timing-function: cubic-bezier(0.37, 0.63, 0.73, 1.06);
+	will-change: transform;
+
+	div {
+		width: 40px;
+		height: 40px;
+		border: 2px solid rgba(255, 255, 255, 0.3);
+		border-radius: 100%;
+		transform: translate(-50%, -50%);
+		transition-duration: 200ms;
+		will-change: width, height;
+	}
+
+	&.hovered {
+		div {
+			width: 80px;
+			height: 80px;
+		}
+	}
+
+	&.clicked {
+		div {
+			width: 20px;
+			height: 20px;
+		}
+	}
+
+	&.hidden {
+		opacity: 0;
+		transition: opacity 0.25s;
+	}
+}
