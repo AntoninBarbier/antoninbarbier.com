@@ -2,6 +2,7 @@ import React, { FunctionComponent, useContext } from 'react'
 import styles from './styles.module.scss'
 import { event } from '../../lib/ga'
 import { MouseContext, MouseContextType } from 'context/mouse-context'
+import Image from 'next/image'
 
 const socials = [
 	{
@@ -27,37 +28,41 @@ const socials = [
 ]
 
 const Socials: FunctionComponent = () => {
-	const { cursorType, cursorChangeHandler } = useContext(
-		MouseContext
-	) as MouseContextType
+	const { cursorType, cursorChangeHandler } = useContext(MouseContext) as MouseContextType
 	return (
 		<div className={styles.container}>
 			<ul className={styles.list}>
-				{socials.map((social) => (
-					<li key={social.name} className={styles.social}>
-						<a
-							href={social.url}
-							target='_blank'
-							rel='noreferrer'
-							onClick={() => {
-								event({
-									action: `social_link`,
-									params: {
-										social_link_name: social.name,
-									},
-								})
-							}}
-							onMouseEnter={() => cursorChangeHandler('hovered')}
-							onMouseLeave={() => cursorChangeHandler('')}
-						>
-							<img
-								src={social.logo}
-								title={social.name}
-								alt={social.name}
-							/>
-						</a>
-					</li>
-				))}
+				{socials.map((social, index) => {
+					console.log(index)
+					return (
+						<li key={social.name} className={styles.social}>
+							<a
+								href={social.url}
+								target='_blank'
+								rel='noreferrer'
+								onClick={() => {
+									event({
+										action: `social_link`,
+										params: {
+											social_link_name: social.name,
+										},
+									})
+								}}
+								onMouseEnter={() => cursorChangeHandler('hovered')}
+								onMouseLeave={() => cursorChangeHandler('')}
+							>
+								<Image
+									src={social.logo}
+									title={social.name}
+									alt={social.name}
+									style={{ animationDelay: `${3.75 + (socials.length - 1 - index) / socials.length}s` }}
+									width={20}
+									height={20}
+								></Image>
+							</a>
+						</li>
+					)
+				})}
 			</ul>
 		</div>
 	)

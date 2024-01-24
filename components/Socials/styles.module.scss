@@ -2,92 +2,92 @@
 @import 'config/styles.scss';
 
 .container {
-  position: absolute;
-  left: 50px;
-  bottom: 0px;
-  width: 40px;
+	position: absolute;
+	left: 50px;
+	bottom: 0px;
+	width: 40px;
 
-  @include tablet {
-    width: 50%;
-    left: 50%;
-    bottom: 30px;
-    transform: translateX(-50%);
-  }
+	@include tablet {
+		width: 50%;
+		left: 50%;
+		bottom: 30px;
+		transform: translateX(-50%);
+	}
 }
 
 .list {
-  display: flex;
-  flex-direction: column;
-  &:after {
-    content: '';
-    margin: 10px auto 0 auto;
-    background-color: white;
-    width: 1px;
-    height: 0px;
-    animation: 0.3s ease-out 3.5s revealLine forwards;
-  }
+	display: flex;
+	flex-direction: column;
+	&:after {
+		content: '';
+		margin: 10px auto 0 auto;
+		background-color: white;
+		width: 1px;
+		height: 0px;
+		animation: 0.3s ease-out 3.5s revealLine forwards;
+	}
 
-  @include tablet {
-    flex-direction: row;
-    justify-content: space-between;
+	@include tablet {
+		flex-direction: row;
+		justify-content: space-between;
 
-    &:after {
-      display: none;
-    }
-  }
+		&:after {
+			display: none;
+		}
+	}
 }
 
 .social {
-  text-align: center;
-  margin-bottom: 20px;
-  transition: transform 0.25s;
+	text-align: center;
+	margin-bottom: 20px;
+	transition: transform 0.25s;
 
-  img {
-    width: 20px;
-    margin: 0px auto;
-    animation: 0.5s linear 4s revealLogo forwards;
-    opacity: 0;
-  }
+	img {
+		width: 20px;
+		margin: 0px auto;
+		animation: 0.25s linear revealLogo forwards;
+		opacity: 0;
+	}
 
-  @include tablet {
-    margin-bottom: 0;
+	@include tablet {
+		margin-bottom: 0;
 
-    img {
-      width: 30px;
-    }
-  }
+		img {
+			width: 30px;
+		}
+	}
 
-  @include mobile {
-    img {
-      width: 20px;
-    }
-  }
+	@include mobile {
+		img {
+			width: 20px;
+		}
+	}
 
-  @include desktop {
-    &:hover {
-      transform: translateY(-5px);
-    }
-  }
+	@include desktop {
+		&:hover {
+			transform: translateY(-5px);
+		}
+	}
 }
 
 @keyframes revealLine {
-  from {
-    height: 0px;
-  }
+	from {
+		height: 0px;
+	}
 
-  to {
-    height: 100px;
-  }
+	to {
+		height: 100px;
+	}
 }
 
 @keyframes revealLogo {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
+	from {
+		opacity: 0;
+		transform: translateY(20px);
+	}
 
-  to {
-    opacity: 1;
-    transform: translateY(0px);
-  }
+	to {
+		opacity: 1;
+		transform: translateY(0px);
+	}
 }
